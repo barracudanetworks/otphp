@@ -89,7 +89,7 @@ namespace OTPHP {
      * @return string the uri for the hmac secret
      */
     public function provisioning_uri($name) {
-      return "otpauth://totp/".urlencode($name)."?secret={$this->secret}";
+      return "otpauth://totp/".urlencode($name)."?secret={$this->secret}&algorithm=SHA1&issuer=Barracuda%20Networks";
     }
 
     /**
