@@ -41,6 +41,7 @@ namespace OTPHP {
      * @var integer
      */
     public $interval;
+    public $issuer;
 
     public function __construct($s, $opt = Array()) {
       $this->interval = isset($opt['interval']) ? $opt['interval'] : 30;
@@ -89,7 +90,9 @@ namespace OTPHP {
      * @return string the uri for the hmac secret
      */
     public function provisioning_uri($name) {
-      return "otpauth://totp/".urlencode($name)."?secret={$this->secret}&algorithm=SHA1&issuer=Barracuda%20Networks";
+      $issuer = urlencode($this->issuer);
+      $issuer = str_replace('+', '%20', $issuer);
+      return "otpauth://totp/".urlencode($name)."?secret={$this->secret}&algorithm=SHA1&issuer=".$issuer;
     }
 
     /**
